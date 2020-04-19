@@ -11,7 +11,7 @@ A basic Ionic client web application which consumes the RestAPI Backend. [Covere
 ## Endpoints
 <b>repo url:</b> https://github.com/nilseri01/cloud-developer.git
 
-<b>endpoint url example:</b> http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/
+<b>endpoint url:</b> http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/
 
 <b>example for valid picture url:</b> http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://www.roningallery.com/media/catalog/product/cache/1/image/6dcdb3bec3b7d3d8fa2d31ce95a0090e/g/r/greatwave_s.jpg
 
