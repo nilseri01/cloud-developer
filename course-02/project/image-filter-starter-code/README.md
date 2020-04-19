@@ -9,9 +9,10 @@ A basic Ionic client web application which consumes the RestAPI Backend. [Covere
 3. [The Image Filtering Microservice](https://github.com/udacity/cloud-developer/tree/master/course-02/project/image-filter-starter-code), the final project for the course. It is a Node-Express application which runs a simple script to process images. [Your assignment]
 
 ## Endpoints
-[repo url:] https://github.com/nilseri01/cloud-developer.git
-[endpoint url example:] http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/
+<b>repo url:</b> https://github.com/nilseri01/cloud-developer.git
 
-[example for valid picture url:] http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://www.roningallery.com/media/catalog/product/cache/1/image/6dcdb3bec3b7d3d8fa2d31ce95a0090e/g/r/greatwave_s.jpg
+<b>endpoint url example:</b> http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/
 
-[example for invalid picture url:] http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg
+<b>example for valid picture url:</b> http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://www.roningallery.com/media/catalog/product/cache/1/image/6dcdb3bec3b7d3d8fa2d31ce95a0090e/g/r/greatwave_s.jpg
+
+<b>example for invalid picture url:</b> http://udagram-nils-dev-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg
