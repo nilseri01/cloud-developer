@@ -1,22 +1,27 @@
-#Project Definition
+# Project Definition
 
 Navigate to your workspace and later to path:
+
 cd /workspace/cloud-developer/course-03/exercises/udacity-c3-deployment/k8s/
 
 Firstly, you should define config properties. Please fill in files env-configmap.yaml, aws-secret.yaml and env-secret.yaml.
 For "secret" files, you will be adding the value from the output after running the base64 converter command:
+
 echo -n 'VALUE_TO_ENCRYPT' | base64
 
 While still in the same path, please run:
+
 kubectl apply -f /workspace/cloud-developer/course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml
 kubectl apply -f /workspace/cloud-developer/course-03/exercises/udacity-c3-deployment/k8s/env-secret.yaml
 
 Additionally, please run the following commands accordingly:
+
 echo -n 'YOUR_AWS_USERNAME' > ./AWS_USERNAME
 echo -n 'YOUR_AWS_PASSWORD' > ./AWS_PASSWORD
 kubectl create secret generic aws-secret --from-file=./AWS_USERNAME --from-file=./AWS_PASSWORD
 
 run these commands:
+
 kubectl apply -f backend-feed-deployment.yaml
 kubectl apply -f backend-user-deployment.yaml
 kubectl apply -f frontend-deployment.yaml
