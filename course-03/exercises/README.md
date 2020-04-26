@@ -4,44 +4,44 @@ Navigate to your workspace and later to path:
 
 cd /workspace/cloud-developer/course-03/exercises/udacity-c3-deployment/k8s/
 
-Firstly, you should define config properties. Please fill in files env-configmap.yaml, aws-secret.yaml and env-secret.yaml.
+Firstly, you should define config properties. Please fill in files env-configmap.yaml, aws-secret.yaml and env-secret.yaml.  
 For "secret" files, you will be adding the value from the output after running the base64 converter command:
 
 echo -n 'VALUE_TO_ENCRYPT' | base64
 
 While still in the same path, please run:
 
-kubectl apply -f /workspace/cloud-developer/course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml
+kubectl apply -f /workspace/cloud-developer/course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml  
 kubectl apply -f /workspace/cloud-developer/course-03/exercises/udacity-c3-deployment/k8s/env-secret.yaml
 
 Additionally, please run the following commands accordingly:
 
-echo -n 'YOUR_AWS_USERNAME' > ./AWS_USERNAME
-echo -n 'YOUR_AWS_PASSWORD' > ./AWS_PASSWORD
+echo -n 'YOUR_AWS_USERNAME' > ./AWS_USERNAME  
+echo -n 'YOUR_AWS_PASSWORD' > ./AWS_PASSWORD  
 kubectl create secret generic aws-secret --from-file=./AWS_USERNAME --from-file=./AWS_PASSWORD
 
 run these commands:
 
-kubectl apply -f backend-feed-deployment.yaml
-kubectl apply -f backend-user-deployment.yaml
-kubectl apply -f frontend-deployment.yaml
-kubectl apply -f reverseproxy-deployment.yaml
+kubectl apply -f backend-feed-deployment.yaml  
+kubectl apply -f backend-user-deployment.yaml  
+kubectl apply -f frontend-deployment.yaml  
+kubectl apply -f reverseproxy-deployment.yaml  
 
 
 ## Useful Commands
-kubectl get deployments
-kubectl get svc
-kubectl get pod
+kubectl get deployments  
+kubectl get svc  
+kubectl get pod  
 
 
 You can reach the homepage via localhost:8100
 
 ## Docker hub images:
 
-https://hub.docker.com/r/nilseri/udacity-frontend
-https://hub.docker.com/r/nilseri/udacity-restapi-user
-https://hub.docker.com/r/nilseri/udacity-restapi-feed
-https://hub.docker.com/r/nilseri/reverseproxy
+https://hub.docker.com/r/nilseri/udacity-frontend  
+https://hub.docker.com/r/nilseri/udacity-restapi-user  
+https://hub.docker.com/r/nilseri/udacity-restapi-feed  
+https://hub.docker.com/r/nilseri/reverseproxy  
 
 
 # Udagram Image Filtering Microservice
