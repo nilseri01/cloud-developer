@@ -1,3 +1,15 @@
+# Notes
+
+* Postman collection - update api request type is updated as "patch" instead of "put". 
+* ElasticSearch query can be performed via curl request for added notes as in the example shown below (deletion does not remove item from ES yet): 
+
+  Request:  
+  curl --location --request GET 'https://noa5k8rr02.execute-api.us-east-2.amazonaws.com/dev/todos/elastic?query=hello' --header 'Authorization: Bearer XXX'
+  
+  Response:  
+  {"response":{"userId":"google-oauth2|100018746223303574250","todoId":"8d25562d-702e-4d9f-93cb-1277844fefb7","createdAt":"2020-05-03T18:17:25.250Z","name":"hello world!","dueDate":"2020-05-10","done":false,"attachmentUrl":"https://serverless-attachments-nilsdev-dev.s3.amazonaws.com/8d25562d-702e-4d9f-93cb-1277844fefb7"}}
+
+
 # Serverless TODO
 
 To implement this project, you need to implement a simple TODO application using AWS Lambda and Serverless framework. Search for all comments starting with the `TODO:` in the code to find the placeholders that you need to implement.
