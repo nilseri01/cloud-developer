@@ -1,0 +1,112 @@
+import * as AWS from 'aws-sdk'
+import * as AWSXRay from 'aws-xray-sdk'
+import { DocumentClient } from 'aws-sdk/clients/dynamodb'
+import { TodoItem } from '../models/TodoItem'
+import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
+
+const XAWS = AWSXRay.captureAWS(AWS)
+
+function createDynamoDBClient() {
+    return new XAWS.DynamoDB.DocumentClient()
+}
+
+export class TodoAccess {
+
+    constructor(
+        private readonly docClient: DocumentClient = createDynamoDBClient(),
+        private readonly todosTable = process.env.TODOS_TABLE,
+        private readonly indexName = process.env.INDEX_NAME,
+        private readonly todoIndexName = process.env.TODO_INDEX_NAME
+    ) { }
+
+    async createTodo(todoItem: TodoItem): Promise<TodoItem> {
+        await this.docClient.put({
+            TableName: this.todosTable,
+            Item: todoItem
+        }).promise()
+
+        return todoItem
+    }
+
+    async getTodos(userId: String): Promise<TodoItem[]> {
+        const result = await this.docClient.query({
+            TableName: this.todosTable,
+            IndexName: this.indexName,
+            KeyConditionExpression: 'userId = :userId',
+            ExpressionAttributeValues: {
+                ':userId': userId
+            }
+        }).promise();
+
+        const items = result.Items
+        return items as TodoItem[]
+    }
+
+    async getTodoById(todoId: String): Promise<TodoItem[]> {
+        const result = await this.docClient.query({
+            TableName: this.todosTable,
+            IndexName: this.todoIndexName,
+            KeyConditionExpression: 'todoId = :todoId',
+            ExpressionAttributeValues: {
+                ':todoId': todoId
+            }
+        }).promise();
+
+        const items = result.Items
+        return items as TodoItem[]
+    }
+
+    async updateTodo(todoId: String, userId: String, updatedTodo: UpdateTodoRequest) {
+        var params = {
+            TableName: this.todosTable,
+            Key: {
+                todoId,
+                userId
+            },
+            UpdateExpression: "set #name = :n, #dueDate = :d, #done = :t",
+            ExpressionAttributeNames: {
+                '#name': 'name',
+                '#dueDate': 'dueDate',
+                '#done': 'done'
+            },
+            ExpressionAttributeValues: {
+                ":n": updatedTodo.name,
+                ":d": updatedTodo.dueDate,
+                ":t": updatedTodo.done
+            },
+            ReturnValues: "UPDATED_NEW"
+        };
+
+        await this.docClient.update(params).promise();
+    }
+
+    async updateAttachment(todoId: String, userId: String, attachmentUrl: String) {
+        var params = {
+            TableName: this.todosTable,
+            TableIndex: this.indexName,
+            Key: {
+                userId: userId,
+                todoId: todoId
+            },
+            UpdateExpression: "set #attachmentUrl = :a",
+            ExpressionAttributeNames: {
+                '#attachmentUrl': 'attachmentUrl'
+            },
+            ExpressionAttributeValues: {
+                ":a": attachmentUrl
+            },
+            ReturnValues: "UPDATED_NEW"
+        };
+        await this.docClient.update(params).promise();
+    }
+
+    async deleteTodo(todoId: String, userId: String) {
+        await this.docClient.delete({
+            TableName: this.todosTable,
+            Key: {
+                todoId,
+                userId
+            }
+        }).promise();
+    }
+}
